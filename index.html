@@ -1,11 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saud Tauqeer's Resume</title>
+    
+    <!-- PDF.js styles -->
+    <link href="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/web/pdf_viewer.min.css" rel="stylesheet">
+    
+    <!-- Custom styles to make the viewer full-page -->
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+        #viewerContainer {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #2a2a2a; 
+        }
+    </style>
 </head>
+
 <body>
-    I'm funny. its true 
+
+<div id="viewerContainer">
+    <div id="viewer" class="pdfViewer"></div>
+</div>
+
+<!-- PDF.js scripts -->
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/web/pdf_viewer.min.js"></script>
+
+<script type="module">
+    var url = 'https://saudtauqeer-resume-bucket.s3.us-east-2.amazonaws.com/saud-tauqeer.pdf';
+
+    var { pdfjsLib, pdfjsViewer } = globalThis;
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+
+    var loadingTask = pdfjsLib.getDocument(url);
+    loadingTask.promise.then(function(pdf) {
+        var viewerContainer = document.getElementById('viewerContainer');
+        var viewer = document.getElementById('viewer');
+
+        var eventBus = new pdfjsViewer.EventBus();
+        var linkService = new pdfjsViewer.PDFLinkService({
+            eventBus: eventBus
+        });
+        var pdfViewer = new pdfjsViewer.PDFViewer({
+            container: viewerContainer,
+            viewer: viewer,
+            eventBus: eventBus,
+            linkService: linkService
+        });
+        linkService.setViewer(pdfViewer);
+        pdfViewer.setDocument(pdf);
+    });
+</script>
+
 </body>
 </html>
