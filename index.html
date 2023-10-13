@@ -1,47 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Saud Tauqeer's Resume</title>
 
     <!-- PDF.js styles -->
-    <link href="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/web/pdf_viewer.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/web/pdf_viewer.min.css"
+      rel="stylesheet"
+    />
 
     <!-- Link to the custom CSS file -->
-    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./index.css" />
 
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VNQMQK5YVE"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-VNQMQK5YVE"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-  gtag('config', 'G-VNQMQK5YVE');
-</script>
-</head>
+      gtag("config", "G-VNQMQK5YVE");
+    </script>
+  </head>
 
-<body>
+  <body>
+    <div id="viewerContainer">
+      <div id="viewer" class="pdfViewer"></div>
+    </div>
 
-<div id="viewerContainer">
-    <div id="viewer" class="pdfViewer"></div>
-</div>
+    <!-- Spinner Element -->
+    <div id="loader"></div>
 
-<!-- Spinner Element -->
-<div id="loader"></div>
+    <!-- Download Button -->
+    <button id="downloadButton">Download</button>
 
-<!-- Download Button -->
-<button id="downloadButton">Download</button>
+    <!-- PDF.js scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/web/pdf_viewer.min.js"></script>
 
-<!-- PDF.js scripts -->
-<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/web/pdf_viewer.min.js"></script>
-
-<!-- Link to the custom JS file -->
-<script type="module" src="./index.js"></script>
-
-</body>
+    <!-- Link to the custom JS file -->
+    <script type="module" src="./index.js"></script>
+  </body>
 </html>
