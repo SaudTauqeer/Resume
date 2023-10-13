@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saud Tauqeer's Resume</title>
-    
+
     <!-- PDF.js styles -->
     <link href="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/web/pdf_viewer.min.css" rel="stylesheet">
-    
-    <!-- Custom styles for viewer and spinner -->
+
+    <!-- Custom styles for viewer, spinner, and download button -->
     <style>
         html, body {
             height: 100%;
@@ -47,6 +47,27 @@
             0% { transform: translate(-50%, -50%) rotate(0deg); }
             100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
+
+        /* Download Button Styles */
+        #downloadButton {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            z-index: 9999;
+        }
+
+        #downloadButton:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+
     </style>
 </head>
 
@@ -58,6 +79,9 @@
 
 <!-- Spinner Element -->
 <div id="loader"></div>
+
+<!-- Download Button -->
+<button id="downloadButton">Download</button>
 
 <!-- PDF.js scripts -->
 <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
@@ -79,6 +103,10 @@
         var linkService = new pdfjsViewer.PDFLinkService({
             eventBus: eventBus
         });
+
+        linkService.externalLinkTarget = 2; 
+
+
         var pdfViewer = new pdfjsViewer.PDFViewer({
             container: viewerContainer,
             viewer: viewer,
@@ -93,8 +121,25 @@
     }, function(reason) {
         //err
         console.error(reason);
-        document.getElementById('loader').style.display = 'none'; // Hide the loader in case of error too
+        document.getElementById('loader').style.display = 'none'; //case of error
     });
+
+    function downloadPDF() {
+    fetch(url)
+    .then(response => response.blob())
+    .then(blob => {
+        var link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'saud-tauqeer-resume.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+}
+
+
+    document.getElementById('downloadButton').addEventListener('click', downloadPDF);
+
 </script>
 
 </body>
