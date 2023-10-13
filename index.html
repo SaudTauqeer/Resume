@@ -9,66 +9,8 @@
     <!-- PDF.js styles -->
     <link href="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/web/pdf_viewer.min.css" rel="stylesheet">
 
-    <!-- Custom styles for viewer, spinner, and download button -->
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            overflow: hidden;
-            background-color: #2a2a2a;
-            font-family: 'Arial', sans-serif;
-        }
-
-        #viewerContainer {
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            position: absolute;
-            top: 0;
-            left: 0;
-            background-color: #2a2a2a;
-        }
-
-        /* Spinner Styles */
-        #loader {
-            border: 8px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top: 8px solid #fff;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        @keyframes spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        /* Download Button Styles */
-        #downloadButton {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            z-index: 9999;
-        }
-
-        #downloadButton:hover {
-            background-color: rgba(255, 255, 255, 1);
-        }
-
-    </style>
+    <!-- Link to the custom CSS file -->
+    <link rel="stylesheet" href="./index.css">
 </head>
 
 <body>
@@ -87,60 +29,8 @@
 <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/web/pdf_viewer.min.js"></script>
 
-<script type="module">
-    var url = 'https://saudtauqeer-resume-bucket.s3.us-east-2.amazonaws.com/saud-tauqeer.pdf';
-
-    var { pdfjsLib, pdfjsViewer } = globalThis;
-
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
-
-    var loadingTask = pdfjsLib.getDocument(url);
-    loadingTask.promise.then(function(pdf) {
-        var viewerContainer = document.getElementById('viewerContainer');
-        var viewer = document.getElementById('viewer');
-
-        var eventBus = new pdfjsViewer.EventBus();
-        var linkService = new pdfjsViewer.PDFLinkService({
-            eventBus: eventBus
-        });
-
-        linkService.externalLinkTarget = 2; 
-
-
-        var pdfViewer = new pdfjsViewer.PDFViewer({
-            container: viewerContainer,
-            viewer: viewer,
-            eventBus: eventBus,
-            linkService: linkService
-        });
-        linkService.setViewer(pdfViewer);
-        pdfViewer.setDocument(pdf);
-
-        //pdf loaded
-        document.getElementById('loader').style.display = 'none';
-    }, function(reason) {
-        //err
-        console.error(reason);
-        document.getElementById('loader').style.display = 'none'; //case of error
-    });
-
-    function downloadPDF() {
-    fetch(url)
-    .then(response => response.blob())
-    .then(blob => {
-        var link = document.createElement('a');
-        link.href = window.URL.createObjectURL(blob);
-        link.download = 'saud-tauqeer-resume.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    });
-}
-
-
-    document.getElementById('downloadButton').addEventListener('click', downloadPDF);
-
-</script>
+<!-- Link to the custom JS file -->
+<script type="module" src="./index.js"></script>
 
 </body>
 </html>
