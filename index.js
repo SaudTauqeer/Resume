@@ -1,5 +1,5 @@
 const url =
-  "https://saudtauqeer-resume-bucket.s3.us-east-2.amazonaws.com/saud-tauqeer.pdf";
+  "https://saudtauqeer-resume-bucket.s3.us-east-2.amazonaws.com/saud.pdf";
 
 const { pdfjsLib, pdfjsViewer } = globalThis;
 
