@@ -1,12 +1,13 @@
-const url =
-  "https://saudtauqeer-resume-bucket.s3.us-east-2.amazonaws.com/saud.pdf";
+const bucket = `https://saudtauqeer-resume-bucket.s3.us-east-2.amazonaws.com`;
+const key = `/saud.pdf`;
+const s3Url = bucket + key;
 
 const { pdfjsLib, pdfjsViewer } = globalThis;
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
   "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
 
-const loadingTask = pdfjsLib.getDocument(url);
+const loadingTask = pdfjsLib.getDocument(s3Url);
 loadingTask.promise.then(
   function (pdf) {
     const viewerContainer = document.getElementById("viewerContainer");
