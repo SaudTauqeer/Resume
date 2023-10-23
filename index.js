@@ -40,7 +40,7 @@ loadingTask.promise.then(
 );
 
 function downloadPDF() {
-  fetch(url)
+  fetch(s3Url)
     .then((response) => response.blob())
     .then((blob) => {
       const link = document.createElement("a");
