@@ -1,5 +1,5 @@
 const bucket = `https://saudtauqeer-resume-bucket.s3.us-east-2.amazonaws.com`;
-const key = `/resume.pdf`;
+const key = `/saud_pdf.pdf`;
 const s3Url = bucket + key;
 
 const { pdfjsLib, pdfjsViewer } = globalThis;
